@@ -40,7 +40,6 @@ class Ball extends CircleComponent
     PositionComponent other,
   ) {
     super.onCollisionStart(intersectionPoints, other);
-    FlameAudio.audioCache.prefix = 'assets/audio/';
     FlameAudio.play('bounce.mp3');
     if (other is PlayArea) {
       if (intersectionPoints.first.y <= 0) {

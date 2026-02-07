@@ -6,6 +6,7 @@ import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flame_audio/flame_audio.dart';
 
 import 'components/components.dart';
 import 'config.dart';
@@ -49,6 +50,16 @@ class BrickBreaker extends FlameGame
   @override
   FutureOr<void> onLoad() async {
     super.onLoad();
+
+    //FlameAudio.audioCache.prefix = 'assets/audio/';
+    await FlameAudio.audioCache.loadAll([
+      'bounce.mp3',
+    ]);
+    // Warm-up play (silent)
+    await FlameAudio.play(
+      'bounce.mp3',
+      volume: 0.0,
+    );
 
     camera.viewfinder.anchor = Anchor.topLeft;
 

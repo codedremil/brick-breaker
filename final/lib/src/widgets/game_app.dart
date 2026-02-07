@@ -1,6 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flame_audio/flame_audio.dart';
 
 import '../brick_breaker.dart';
 import '../config.dart';
