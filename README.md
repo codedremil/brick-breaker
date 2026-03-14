@@ -11,10 +11,16 @@ Pour compiler les versions du jeu :
 $ git clone https://github.com/codedremil/brick-breaker.git
 ```
 
-Puit vous vous déplacez dans un répertoire (v1, v2,....), et vous exécutez les commandes suivantes :
+Puis vous vous déplacez dans un répertoire (v1, v2,....), et vous exécutez les commandes suivantes :
 
 ```
 $ flutter create .
 $ flutter pub get
 $ flutter run
+```
+
+Pour obtenir un fichier APK, installable sur votre téléphone, exécutez la commande suivante :
+
+```
+$ flutter build apk
 ```
