@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import '../brick_breaker.dart';
 
 class Bat extends PositionComponent
-    with DragCallbacks, HasGameReference<BrickBreaker> {
+    with HasGameReference<BrickBreaker> {
+    //with DragCallbacks, HasGameReference<BrickBreaker> { 
+    //il faut supprimer DragCallbacks sinon il faudra 2 doigts pour faire bouger la bat !
   Bat({
     required this.cornerRadius,
     required super.position,
@@ -29,12 +31,23 @@ class Bat extends PositionComponent
     );
   }
 
+  // Pour que la raquette puisse être déplacée quelle que soit
+  // la position du doigt à l'écran, on déplace la gestion du Detector au niveau du jeu
+  /*
   @override
   void onDragUpdate(DragUpdateEvent event) {
     super.onDragUpdate(event);
     position.x = (position.x + event.localDelta.x).clamp(0, game.width);
   }
+  */
 
+  // appelée quand on déplace avec le doigt
+  void move(double deltax) {
+    moveBy(deltax);
+    //position.x = (position.x + deltax).clamp(0, game.width);
+  }
+
+  // appelée quand on utilise les touches du clavier
   void moveBy(double dx) {
     add(
       MoveToEffect(

@@ -14,7 +14,7 @@ import 'config.dart';
 enum PlayState { welcome, playing, newBall, gameOver, won }
 
 class BrickBreaker extends FlameGame
-    with HasCollisionDetection, KeyboardEvents, TapCallbacks {
+    with HasCollisionDetection, KeyboardEvents, TapCallbacks, PanDetector {
   BrickBreaker()
     : super(
         camera: CameraComponent.withFixedResolution(
@@ -23,6 +23,7 @@ class BrickBreaker extends FlameGame
         ),
       );
 
+  late Bat _bat;
   final ValueNotifier<int> score = ValueNotifier(0);
   final ValueNotifier<int> ballsLeft = ValueNotifier(initialBallCount);
   final rand = math.Random();
@@ -82,7 +83,7 @@ class BrickBreaker extends FlameGame
     newBall();
 
     world.add(
-      Bat(
+      _bat = Bat(
         size: Vector2(batWidth, batHeight),
         cornerRadius: const Radius.circular(ballRadius / 2),
         position: Vector2(width / 2, height * 0.95),
@@ -143,6 +144,13 @@ class BrickBreaker extends FlameGame
         startGame();
     }
     return KeyEventResult.handled;
+  }
+
+  // On veut pouvoir déplacer la raquette avec le doigt où qu'il soit:
+  @override
+  void onPanUpdate(DragUpdateInfo info) {
+    // Move bat horizontally with finger movement
+    _bat.move(info.delta.global.x);
   }
 
   @override
